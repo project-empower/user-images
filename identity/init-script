@@ -1,0 +1,3 @@
+/usr/sbin/avahi-daemon -D
+su -c '/usr/bin/gpg-agent --daemon' identity
+/usr/sbin/sshd  -ddd -D
