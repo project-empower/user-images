@@ -8,17 +8,20 @@ RUN apk add avahi
 
 RUN apk add openssh-client
 
+RUN ssh-keygen -A
+
 RUN echo "[Server]" >> /etc/avahi/avahi-daemon.conf
 RUN echo "enable-dbus=no" >> /etc/avahi/avahi-daemon.conf
 
-RUN echo "PubKeyAuthentication yes" >> /etc/ssh/sshd_config
-RUN echo "AllowStreamLocalForwarding yes" >> /etc/ssh/sshd_config
+RUN echo "PubKeyAuthentication yes" > /etc/ssh/sshd_config
+RUN echo "StreamLocalBindUnlink yes" >> /etc/ssh/sshd_config
+#RUN echo "AllowStreamLocalForwarding yes" >> /etc/ssh/sshd_config
 
-RUN ssh-keygen -A
+#RUN ssh-keygen -A
 
-RUN echo "AllowTcpForwarding yes" >> /etc/ssh/sshd_config
+#RUN echo "AllowTcpForwarding yes" >> /etc/ssh/sshd_config
 
-RUN apk add man
+#RUN apk add man
 
 COPY init-script /init-script
 
